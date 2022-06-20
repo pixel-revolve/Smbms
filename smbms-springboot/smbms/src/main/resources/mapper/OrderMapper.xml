@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.mapper.OrderMapper">
+    <!--add-->
+    <insert id="add" parameterType="SysOrder">
+        insert into sys_order(user_id, goods_id,order_date, number, date_needed, pay_method, deliver_method)
+        values(#{userId},#{goodsId},#{orderDate},#{number},#{dateNeeded},#{payMethod},#{deliverMethod})
+    </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete from sys_order where id=#{id};
+    </delete>
+
+    <!--update-->
+    <update id="update" parameterType="SysOrder">
+        update sys_order set user_id=#{userId},goods_id=#{goodsId},order_date=#{orderDate},number=#{number},date_needed=#{dateNeeded},pay_method=#{payMethod},deliver_method=#{deliverMethod}
+        where id=#{id}
+    </update>
+
+    <!--查询所有订单-->
+    <resultMap id="getOrderList" type="SysOrder">
+        <result property="userId" column="user_id"></result>
+        <result property="orderDate" column="order_date"></result>
+        <result property="goodsId" column="goods_id"></result>
+        <result property="dateNeeded" column="date_needed"></result>
+        <result property="payMethod" column="pay_method"></result>
+        <result property="deliverMethod" column="deliver_method"></result>
+    </resultMap>
+    <select id="getOrderList" resultMap="getOrderList">
+        select * from sys_order
+        where 1=1
+        <if test="userId!=null and userId!=''">
+            and user_id like concat('%',#{userId},'%')
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id like concat('%',#{goodsId},'%')
+        </if>
+        <if test="orderEndDate!=null and orderEndDate!=''">
+            and order_date &lt;  #{orderEndDate}
+        </if>
+        <if test="orderStartDate!=null and orderStartDate!=''">
+            and order_date &gt;= #{orderStartDate}
+        </if>
+        <if test="endDateNeeded!=null and endDateNeeded!=''">
+            and date_needed  &lt;  #{endDateNeeded}
+        </if>
+        <if test="startDateNeeded!=null and startDateNeeded!=''">
+            and date_needed  &gt;= #{startDateNeeded}
+        </if>
+        <if test="payMethod!=null and payMethod!=''">
+            and pay_method like concat('%',#{payMethod},'%')
+        </if>
+        <if test="deliverMethod!=null and deliverMethod!=''">
+            and deliver_method like concat('%',#{deliverMethod},'%')
+        </if>
+    </select>
+
+    <!--根据id查询订单-->
+    <resultMap id="getOrder" type="SysOrder">
+        <result property="userId" column="user_id"></result>
+        <result property="orderDate" column="order_date"></result>
+        <result property="goodsId" column="goods_id"></result>
+        <result property="dateNeeded" column="date_needed"></result>
+        <result property="payMethod" column="pay_method"></result>
+        <result property="deliverMethod" column="deliver_method"></result>
+    </resultMap>
+    <select id="getOrderById" resultMap="getOrder">
+        select * from sys_order where id=#{id};
+    </select>
+</mapper>

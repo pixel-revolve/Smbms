@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+
+global:
+  jwt:
+    # 密匙KEY
+    secret: JWTSecret
+    # HeaderKEY
+    tokenHeader: Authorization
+    # Token前缀字符
+    tokenPrefix: dyh-
+    # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
+    expiration: 604800

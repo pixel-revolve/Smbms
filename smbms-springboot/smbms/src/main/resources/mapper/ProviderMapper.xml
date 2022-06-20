@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.mapper.ProviderMapper">
+    <!--add-->
+    <insert id="add" parameterType="Provider">
+        insert into provider(id, code, name, `desc`, phone, address)
+        values (#{id},#{code},#{name},#{desc},#{phone},#{address})
+    </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete from provider where id=#{id}
+    </delete>
+
+    <!--update-->
+    <update id="update" parameterType="Provider">
+        update provider set code=#{code},name=#{name},`desc`=#{desc},phone=#{phone},address=#{address} where id=#{id}
+    </update>
+
+    <!--查询所有提供商-->
+    <select id="getProviderList" resultType="Provider">
+        select * from provider
+        where 1=1
+        <if test="code!=null and code!=''">
+            and code like concat('%',#{code},'%')
+        </if>
+        <if test="name!=null and name!=''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="desc!=null and desc!=''">
+            and `desc` like concat('%',#{desc},'%')
+        </if>
+        <if test="phone!=null and phone!=''">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="address!=null and address!=''">
+            and address like concat('%',#{address},'%')
+        </if>
+    </select>
+
+    <!--根据id查询提供商-->
+    <select id="getProviderById" resultType="Provider">
+        select * from provider where id=#{id};
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+database-course-design/.idea
+target
+*.iml
+node_modules
+electron-build
+dis_electron
+dist
+.idea
+数据库课程设计报告.docx

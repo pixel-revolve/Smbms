@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.mapper.GoodsMapper">
+    <!--add-->
+    <insert id="add" parameterType="SysGoods">
+        insert into sys_goods(name, price, cover_pic, comment, brand, provider_id, stock)
+        values (#{name},#{price},#{coverPic},#{comment},#{brand},#{providerId},#{stock})
+    </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete from sys_goods where id=#{id}
+    </delete>
+
+    <!--update-->
+    <update id="update" parameterType="SysGoods">
+        update sys_goods set name=#{name},price=#{price},cover_pic=#{coverPic},comment=#{comment},brand=#{brand},provider_id=#{providerId},stock=#{stock}
+        where id=#{id}
+    </update>
+
+    <!--查询所有商品-->
+    <resultMap id="getGoodsList" type="SysGoods">
+        <result property="coverPic" column="cover_pic"></result>
+        <result property="providerId" column="provider_id"></result>
+    </resultMap>
+    <select id="getGoodsList" resultMap="getGoodsList">
+        select * from sys_goods
+        where 1=1
+            <if test="name!=null and name!=''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="brand!=null and brand!=''">
+                and brand like concat('%',#{brand},'%')
+            </if>
+            <if test="upperPrice!=null and upperPrice!=''">
+                and price &lt;  #{upperPrice}
+            </if>
+            <if test="lowerPrice!=null and lowerPrice!=''">
+                and price &gt;= #{lowerPrice}
+            </if>
+    </select>
+
+    <!--根据id查询商品-->
+    <resultMap id="getGoods" type="SysGoods">
+        <result property="coverPic" column="cover_pic"></result>
+        <result property="providerId" column="provider_id"></result>
+    </resultMap>
+    <select id="getGoodsById" resultMap="getGoods">
+        select * from sys_goods where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,112 @@
+[{
+  "roleIds": [1, 2],
+  "path": "/system",
+  "component": "layout",
+  "name": "system",
+  "hidden": false,
+  "meta": {
+    "title": "系统管理",
+    "icon": "system"
+  },
+  "children": [{
+      "roleIds": [1, 2],
+      "path": "/mgr",
+      "component": "views/system/user/index",
+      "name": "mgr",
+      "hidden": false,
+      "meta": {
+        "title": "用户管理",
+        "icon": "user"
+      }
+    },
+    {
+      "roleIds": [1,2],
+      "path": "/role",
+      "component": "views/system/role/index",
+      "name": "role",
+      "hidden": false,
+      "meta": {
+        "title": "角色管理",
+        "icon": "peoples"
+      }
+    },
+    {
+      "roleIds": [1, 2],
+      "path": "/goods",
+      "component": "views/system/goods/index",
+      "name": "goods",
+      "hidden": false,
+      "meta": {
+        "title": "商品管理",
+        "icon": "goods"
+      }
+    },
+    {
+      "roleIds": [1, 2],
+      "path": "/order",
+      "component": "views/system/order/index",
+      "name": "order",
+      "hidden": false,
+      "meta": {
+        "title": "订单管理",
+        "icon": "order"
+      }
+    },
+    {
+      "roleIds": [1, 2],
+      "path": "/provider",
+      "component": "views/system/provider/index",
+      "name": "provider",
+      "hidden": false,
+      "meta": {
+        "title": "供应商管理",
+        "icon": "provider"
+      }
+    },
+    {
+      "roleIds": [1, 2],
+      "path": "/coupon",
+      "component": "views/system/coupon/index",
+      "name": "coupon",
+      "hidden": false,
+      "meta": {
+        "title": "优惠卷管理",
+        "icon": "coupon"
+      }
+    }
+  ]
+},{
+  "roleIds": [1, 2],
+  "path": "/document",
+  "component": "layout",
+  "name": "document",
+  "hidden": false,
+  "meta": {
+    "title": "接口文档",
+    "icon": "documentation"
+  },
+  "children": [{
+      "roleIds": [1, 2],
+      "path": "/swagger",
+      "component": "views/document/swagger/index",
+      "name": "swagger",
+      "hidden": false,
+      "meta": {
+        "title": "Swagger模式",
+        "icon": "swagger"
+      }
+    },
+    {
+      "roleIds": [1],
+      "path": "/knife4j",
+      "component": "views/document/knife4j/index",
+      "name": "knife4j",
+      "hidden": false,
+      "meta": {
+        "title": "Knife4j模式",
+        "icon": "knife4j"
+      }
+    }
+  ]
+}]
+

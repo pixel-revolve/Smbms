@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.mapper.CouponMapper">
+    <!--add-->
+    <insert id="add" parameterType="Coupon">
+        insert into coupon(id, price, comment,user_id)
+        values (#{id},#{price},#{comment},#{userId});
+    </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete from coupon where id=#{id};
+    </delete>
+
+    <!--update-->
+    <update id="update" parameterType="Coupon">
+        update coupon set price=#{price},comment=#{comment},user_id=#{userId}
+        where id=#{id};
+    </update>
+
+    <!--查询所有优惠券-->
+    <resultMap id="getCouponList" type="Coupon">
+        <result property="userId" column="user_id"></result>
+    </resultMap>
+    <select id="getCouponList" resultMap="getCouponList">
+        select * from coupon
+        where 1=1
+        <if test="price!='' and price!=null">
+            and price = #{price}
+        </if>
+        <if test="userId!='' and userId!=null">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <!--根据id查询优惠券-->
+    <resultMap id="getCoupon" type="Coupon">
+        <result property="userId" column="user_id"></result>
+    </resultMap>
+    <select id="getCouponById" resultMap="getCoupon">
+        select * from coupon where id=#{id};
+    </select>
+</mapper>

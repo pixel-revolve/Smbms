@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chy.mapper.RoleMapper">
+    <!--查询所有角色-->
+    <resultMap id="SysRoleMap" type="SysRole">
+        <id property="roleId" column="role_id" jdbcType="BIGINT"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--add-->
+    <insert id="add" parameterType="SysRole">
+        insert into sys_role(role_name, description)
+        values (#{roleName},#{description})
+    </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete from sys_role where role_id=#{id}
+    </delete>
+
+    <!--update-->
+    <update id="update" parameterType="SysRole">
+        update sys_role set role_name=#{roleName},description=#{description} where role_id=#{roleId}
+    </update>
+
+    <select id="getRoleList" resultMap="SysRoleMap">
+        select * from sys_role
+        where 1=1
+        <if test="roleName!='' and roleName!=null">
+            and role_name like concat('%',#{roleName},'%')
+        </if>
+    </select>
+</mapper>
